@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -19,9 +21,51 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 
 		return runner -> {
-			createStudent(studentDAO);
+			//createStudent(studentDAO);
 
+			//createMultipleStudents(studentDAO);
+
+			//readStudent(studentDAO);
+
+			//queryForStudents(studentDAO);
+
+			queryForStudentsByLastName(studentDAO);
 		};
+	}
+
+	private void queryForStudentsByLastName(StudentDAO studentDAO) {
+		List<Student> studentList = studentDAO.findByLastName("Smith");
+
+		for(Student student:studentList){
+			System.out.println(student.toString());
+		}
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+
+		List<Student> studentList = studentDAO.findAll();
+
+		for(Student student : studentList){
+			System.out.println(student.toString());
+		}
+	}
+
+	private void readStudent(StudentDAO studentDAO) {
+
+		Student student = studentDAO.findById(4);
+
+		System.out.println(student.toString());
+
+	}
+
+	private void createMultipleStudents(StudentDAO studentDAO) {
+
+		studentDAO.save(new Student("John","Martinez","john@gmail.com"));
+		studentDAO.save(new Student("Alice", "Johnson", "alice.johnson@example.com"));
+		studentDAO.save(new Student("Michael", "Smith", "michael.smith@studentmail.com"));
+		studentDAO.save(new Student("Michael", "Smith", "michael.smith@studentmail.com"));
+		studentDAO.save(new Student("David", "Brown", "david.brown@example.com"));
+
 	}
 
 	private void createStudent(StudentDAO studentDAO){
