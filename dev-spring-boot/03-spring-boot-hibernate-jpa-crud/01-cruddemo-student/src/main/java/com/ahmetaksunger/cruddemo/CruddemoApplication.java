@@ -33,8 +33,16 @@ public class CruddemoApplication {
 
 			//updateStudent(studentDAO);
 
-			updateAllStudent(studentDAO);
+			//updateAllStudent(studentDAO);
+
+			deleteStudent(studentDAO);
 		};
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+
+		studentDAO.delete(2);
+
 	}
 
 	private void updateAllStudent(StudentDAO studentDAO) {

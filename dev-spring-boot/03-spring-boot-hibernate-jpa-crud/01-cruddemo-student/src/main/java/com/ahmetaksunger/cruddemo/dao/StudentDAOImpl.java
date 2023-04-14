@@ -76,4 +76,14 @@ public class StudentDAOImpl implements StudentDAO{
         System.out.println(numOfRowAffected + " rows has been affected");
     }
 
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+
+        Student student = entityManager.find(Student.class,id);
+
+        entityManager.remove(student);
+
+    }
+
 }
